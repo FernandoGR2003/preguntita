@@ -17,166 +17,105 @@ font-family:'Segoe UI',sans-serif;
 }
 
 body{
-
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-
 background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-
 overflow:hidden;
-
 }
 
 /* SOBRE */
 
 .envelope{
-
 width:300px;
 height:200px;
-
 background:#ff4d6d;
-
 position:relative;
-
 border-radius:12px;
-
 cursor:pointer;
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 box-shadow:0 10px 30px rgba(0,0,0,.2);
-
 }
 
 .envelope:before{
-
 content:"";
-
 position:absolute;
-
 top:0;
 left:0;
-
 border-left:150px solid transparent;
 border-right:150px solid transparent;
 border-top:100px solid #ff6f86;
-
 }
 
 .texto{
-
 color:white;
 font-size:20px;
 font-weight:600;
 z-index:2;
-
 }
 
 /* CARTA */
 
 .card{
-
 position:absolute;
-
 background:white;
-
 padding:35px;
-
 border-radius:20px;
-
 text-align:center;
-
 width:90%;
 max-width:380px;
-
 box-shadow:0 15px 40px rgba(0,0,0,.2);
-
 transform:scale(0);
-
 transition:.4s;
-
 }
 
 .card h1{
-
 color:#ff4d6d;
-
 font-size:22px;
-
 margin-bottom:25px;
-
 }
 
 /* BOTONES */
 
 .botones{
-
 display:flex;
 justify-content:space-between;
-
 margin-top:15px;
-
 }
 
 button{
-
 padding:12px 28px;
-
 font-size:16px;
-
 border:none;
-
 border-radius:10px;
-
 cursor:pointer;
-
 }
 
 #si{
-
 background:#ff4d6d;
 color:white;
-
 }
 
 #no{
-
 background:#eee;
-
 }
 
 /* corazones */
 
 .heart{
-
 position:absolute;
-
 bottom:-30px;
-
 color:#ff4d6d;
-
 font-size:18px;
-
 animation:flotar linear infinite;
-
 }
 
 @keyframes flotar{
-
-0%{
-transform:translateY(0);
-opacity:1;
-}
-
-100%{
-transform:translateY(-110vh);
-opacity:0;
-}
-
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
 }
 
 </style>
@@ -185,13 +124,9 @@ opacity:0;
 
 <body>
 
-<!-- SOBRE -->
-
 <div class="envelope" id="sobre">
 <span class="texto">Toca para abrir 💌</span>
 </div>
-
-<!-- CARTA -->
 
 <div class="card" id="carta">
 
@@ -201,10 +136,8 @@ a comer encebollado conmigo? ❤️
 </h1>
 
 <div class="botones">
-
 <button id="si">Sí</button>
 <button id="no">No</button>
-
 </div>
 
 </div>
@@ -225,29 +158,23 @@ carta.style.transform="scale(1)";
 
 }
 
-/* mover botón NO dentro de la pantalla */
+/* mover botón NO pero siempre visible */
 
 function moverBoton(){
 
-const anchoPantalla = window.innerWidth;
-const altoPantalla = window.innerHeight;
+const margen = 80;
 
-const anchoBoton = botonNo.offsetWidth;
-const altoBoton = botonNo.offsetHeight;
+const ancho = window.innerWidth - botonNo.offsetWidth - margen;
+const alto = window.innerHeight - botonNo.offsetHeight - margen;
 
-const maxX = anchoPantalla - anchoBoton - 20;
-const maxY = altoPantalla - altoBoton - 20;
+const x = Math.random() * ancho + margen/2;
+const y = Math.random() * alto + margen/2;
 
-const x = Math.random() * maxX;
-const y = Math.random() * maxY;
-
-botonNo.style.position = "fixed";
+botonNo.style.position="fixed";
 botonNo.style.left = x + "px";
 botonNo.style.top = y + "px";
 
 }
-
-/* cuando intentan presionar NO */
 
 botonNo.addEventListener("mouseover", moverBoton);
 botonNo.addEventListener("touchstart", moverBoton);
@@ -260,7 +187,7 @@ window.location.href="respuesta.html";
 
 }
 
-/* corazones flotando */
+/* corazones */
 
 function crearCorazon(){
 
@@ -275,9 +202,7 @@ heart.style.animationDuration=(Math.random()*4+4)+"s";
 
 document.body.appendChild(heart);
 
-setTimeout(()=>{
-heart.remove();
-},7000);
+setTimeout(()=>{heart.remove();},7000);
 
 }
 
