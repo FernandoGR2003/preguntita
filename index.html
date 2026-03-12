@@ -40,7 +40,7 @@ background:#ff4d6d;
 
 position:relative;
 
-border-radius:10px;
+border-radius:12px;
 
 cursor:pointer;
 
@@ -50,11 +50,7 @@ align-items:center;
 
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 
-overflow:hidden;
-
 }
-
-/* tapa del sobre */
 
 .envelope:before{
 
@@ -65,18 +61,11 @@ position:absolute;
 top:0;
 left:0;
 
-width:0;
-height:0;
-
 border-left:150px solid transparent;
 border-right:150px solid transparent;
 border-top:100px solid #ff6f86;
 
-z-index:1;
-
 }
-
-/* texto del sobre */
 
 .texto{
 
@@ -95,7 +84,7 @@ position:absolute;
 
 background:white;
 
-padding:30px;
+padding:35px;
 
 border-radius:20px;
 
@@ -108,9 +97,7 @@ box-shadow:0 15px 40px rgba(0,0,0,.2);
 
 transform:scale(0);
 
-transition:.5s;
-
-z-index:5;
+transition:.4s;
 
 }
 
@@ -120,7 +107,7 @@ color:#ff4d6d;
 
 font-size:22px;
 
-margin-bottom:20px;
+margin-bottom:25px;
 
 }
 
@@ -131,11 +118,13 @@ margin-bottom:20px;
 display:flex;
 justify-content:space-between;
 
+margin-top:15px;
+
 }
 
 button{
 
-padding:12px 25px;
+padding:12px 28px;
 
 font-size:16px;
 
@@ -225,64 +214,51 @@ const botonSi = document.getElementById("si");
 
 /* abrir carta */
 
-sobre.onclick = () =>{
+sobre.onclick = () => {
 
 sobre.style.display="none";
 carta.style.transform="scale(1)";
 
 }
 
-/* mover botón NO */
+/* mover NO sin deformarse */
 
 function mover(){
 
-const siRect = botonSi.getBoundingClientRect();
+const ancho = window.innerWidth - botonNo.offsetWidth;
+const alto = window.innerHeight - botonNo.offsetHeight;
 
-let x,y;
+const x = Math.random() * ancho;
+const y = Math.random() * alto;
 
-do{
-
-x=Math.random()*(window.innerWidth-100);
-y=Math.random()*(window.innerHeight-100);
-
-}while(
-x>siRect.left-100 &&
-x<siRect.right &&
-y>siRect.top-100 &&
-y<siRect.bottom
-);
-
-botonNo.style.position="absolute";
-botonNo.style.left=x+"px";
-botonNo.style.top=y+"px";
+botonNo.style.position="fixed";
+botonNo.style.left = x + "px";
+botonNo.style.top = y + "px";
 
 }
 
-botonNo.addEventListener("mouseover",mover);
-botonNo.addEventListener("touchstart",mover);
+botonNo.addEventListener("mouseover", mover);
+botonNo.addEventListener("touchstart", mover);
 
 /* botón sí */
 
-botonSi.onclick=()=>{
+botonSi.onclick = () => {
 
 window.location.href="respuesta.html";
 
 }
 
-/* corazones flotando */
+/* corazones */
 
 function crearCorazon(){
 
-const heart=document.createElement("div");
+const heart = document.createElement("div");
 
 heart.className="heart";
-
 heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"vw";
-
 heart.style.fontSize=(Math.random()*20+15)+"px";
-
 heart.style.animationDuration=(Math.random()*4+4)+"s";
 
 document.body.appendChild(heart);
