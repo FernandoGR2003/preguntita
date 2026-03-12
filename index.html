@@ -25,7 +25,7 @@ align-items:center;
 
 background:linear-gradient(135deg,#ff9a9e,#fad0c4);
 
-overflow:hidden;
+overflow:hidden; /* evita scroll */
 
 }
 
@@ -40,7 +40,7 @@ background:#ff4d6d;
 
 position:relative;
 
-border-radius:10px;
+border-radius:12px;
 
 cursor:pointer;
 
@@ -54,8 +54,6 @@ overflow:hidden;
 
 }
 
-/* tapa del sobre */
-
 .envelope:before{
 
 content:"";
@@ -65,9 +63,6 @@ position:absolute;
 top:0;
 left:0;
 
-width:0;
-height:0;
-
 border-left:150px solid transparent;
 border-right:150px solid transparent;
 border-top:100px solid #ff6f86;
@@ -76,13 +71,12 @@ z-index:1;
 
 }
 
-/* texto del sobre */
-
 .texto{
 
 color:white;
 font-size:20px;
 font-weight:600;
+
 z-index:2;
 
 }
@@ -131,6 +125,8 @@ margin-bottom:20px;
 display:flex;
 justify-content:space-between;
 
+position:relative;
+
 }
 
 button{
@@ -157,6 +153,9 @@ color:white;
 #no{
 
 background:#eee;
+
+position:absolute;
+right:0;
 
 }
 
@@ -207,7 +206,7 @@ opacity:0;
 a comer encebollado conmigo? ❤️
 </h1>
 
-<div class="botones">
+<div class="botones" id="areaBotones">
 
 <button id="si">Sí</button>
 <button id="no">No</button>
@@ -222,6 +221,7 @@ const sobre = document.getElementById("sobre");
 const carta = document.getElementById("carta");
 const botonNo = document.getElementById("no");
 const botonSi = document.getElementById("si");
+const area = document.getElementById("areaBotones");
 
 /* abrir carta */
 
@@ -232,29 +232,20 @@ carta.style.transform="scale(1)";
 
 }
 
-/* mover botón NO */
+/* mover botón NO dentro del área */
 
 function mover(){
 
-const siRect = botonSi.getBoundingClientRect();
+const areaRect = area.getBoundingClientRect();
 
-let x,y;
+const maxX = areaRect.width - botonNo.offsetWidth;
+const maxY = 60;
 
-do{
+const x = Math.random()*maxX;
+const y = Math.random()*maxY;
 
-x=Math.random()*(window.innerWidth-100);
-y=Math.random()*(window.innerHeight-100);
-
-}while(
-x>siRect.left-100 &&
-x<siRect.right &&
-y>siRect.top-100 &&
-y<siRect.bottom
-);
-
-botonNo.style.position="absolute";
-botonNo.style.left=x+"px";
-botonNo.style.top=y+"px";
+botonNo.style.left = x + "px";
+botonNo.style.top = y + "px";
 
 }
 
@@ -263,13 +254,13 @@ botonNo.addEventListener("touchstart",mover);
 
 /* botón sí */
 
-botonSi.onclick=()=>{
+botonSi.onclick = () => {
 
 window.location.href="respuesta.html";
 
 }
 
-/* corazones flotando */
+/* corazones */
 
 function crearCorazon(){
 
@@ -280,9 +271,7 @@ heart.className="heart";
 heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"vw";
-
 heart.style.fontSize=(Math.random()*20+15)+"px";
-
 heart.style.animationDuration=(Math.random()*4+4)+"s";
 
 document.body.appendChild(heart);
