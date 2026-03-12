@@ -48,14 +48,13 @@ display:flex;
 justify-content:center;
 align-items:center;
 
-color:white;
-font-size:20px;
-
 box-shadow:0 10px 30px rgba(0,0,0,.2);
 
-transition:.5s;
+overflow:hidden;
 
 }
+
+/* tapa del sobre */
 
 .envelope:before{
 
@@ -64,7 +63,6 @@ content:"";
 position:absolute;
 
 top:0;
-
 left:0;
 
 width:0;
@@ -72,11 +70,20 @@ height:0;
 
 border-left:150px solid transparent;
 border-right:150px solid transparent;
-border-bottom:100px solid #ff6f86;
+border-top:100px solid #ff6f86;
 
-transform-origin:top;
+z-index:1;
 
-transition:.6s;
+}
+
+/* texto del sobre */
+
+.texto{
+
+color:white;
+font-size:20px;
+font-weight:600;
+z-index:2;
 
 }
 
@@ -102,6 +109,8 @@ box-shadow:0 15px 40px rgba(0,0,0,.2);
 transform:scale(0);
 
 transition:.5s;
+
+z-index:5;
 
 }
 
@@ -188,7 +197,7 @@ opacity:0;
 <body>
 
 <div class="envelope" id="sobre">
-Toca para abrir 💌
+<span class="texto">Toca para abrir 💌</span>
 </div>
 
 <div class="card" id="carta">
@@ -223,7 +232,7 @@ carta.style.transform="scale(1)";
 
 }
 
-/* mover NO */
+/* mover botón NO */
 
 function mover(){
 
@@ -252,7 +261,7 @@ botonNo.style.top=y+"px";
 botonNo.addEventListener("mouseover",mover);
 botonNo.addEventListener("touchstart",mover);
 
-/* respuesta */
+/* botón sí */
 
 botonSi.onclick=()=>{
 
@@ -260,7 +269,7 @@ window.location.href="respuesta.html";
 
 }
 
-/* corazones */
+/* corazones flotando */
 
 function crearCorazon(){
 
