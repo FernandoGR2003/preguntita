@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Preguntita ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+
+overflow:hidden;
+
+}
+
+/* SOBRE */
+
+.envelope{
+
+width:300px;
+height:200px;
+
+background:#ff4d6d;
+
+position:relative;
+
+border-radius:10px;
+
+cursor:pointer;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+color:white;
+font-size:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+transition:.5s;
+
+}
+
+.envelope:before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:0;
+height:0;
+
+border-left:150px solid transparent;
+border-right:150px solid transparent;
+border-bottom:100px solid #ff6f86;
+
+transform-origin:top;
+
+transition:.6s;
+
+}
+
+/* CARTA */
+
+.card{
+
+position:absolute;
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+width:90%;
+max-width:380px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.2);
+
+transform:scale(0);
+
+transition:.5s;
+
+}
+
+.card h1{
+
+color:#ff4d6d;
+
+font-size:22px;
+
+margin-bottom:20px;
+
+}
+
+/* BOTONES */
+
+.botones{
+
+display:flex;
+justify-content:space-between;
+
+}
+
+button{
+
+padding:12px 25px;
+
+font-size:16px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+#si{
+
+background:#ff4d6d;
+color:white;
+
+}
+
+#no{
+
+background:#eee;
+
+}
+
+/* corazones */
+
+.heart{
+
+position:absolute;
+
+bottom:-30px;
+
+color:#ff4d6d;
+
+font-size:18px;
+
+animation:flotar linear infinite;
+
+}
+
+@keyframes flotar{
+
+0%{
+transform:translateY(0);
+opacity:1;
+}
+
+100%{
+transform:translateY(-110vh);
+opacity:0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="envelope" id="sobre">
+Toca para abrir 💌
+</div>
+
+<div class="card" id="carta">
+
+<h1>
+¿Quieres salir mañana <br>
+a comer encebollado conmigo? ❤️
+</h1>
+
+<div class="botones">
+
+<button id="si">Sí</button>
+<button id="no">No</button>
+
+</div>
+
+</div>
+
+<script>
+
+const sobre = document.getElementById("sobre");
+const carta = document.getElementById("carta");
+const botonNo = document.getElementById("no");
+const botonSi = document.getElementById("si");
+
+/* abrir carta */
+
+sobre.onclick = () =>{
+
+sobre.style.display="none";
+carta.style.transform="scale(1)";
+
+}
+
+/* mover NO */
+
+function mover(){
+
+const siRect = botonSi.getBoundingClientRect();
+
+let x,y;
+
+do{
+
+x=Math.random()*(window.innerWidth-100);
+y=Math.random()*(window.innerHeight-100);
+
+}while(
+x>siRect.left-100 &&
+x<siRect.right &&
+y>siRect.top-100 &&
+y<siRect.bottom
+);
+
+botonNo.style.position="absolute";
+botonNo.style.left=x+"px";
+botonNo.style.top=y+"px";
+
+}
+
+botonNo.addEventListener("mouseover",mover);
+botonNo.addEventListener("touchstart",mover);
+
+/* respuesta */
+
+botonSi.onclick=()=>{
+
+window.location.href="respuesta.html";
+
+}
+
+/* corazones */
+
+function crearCorazon(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(Math.random()*20+15)+"px";
+
+heart.style.animationDuration=(Math.random()*4+4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},7000);
+
+}
+
+setInterval(crearCorazon,400);
+
+</script>
+
+</body>
+</html>
