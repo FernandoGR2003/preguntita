@@ -185,9 +185,13 @@ opacity:0;
 
 <body>
 
+<!-- SOBRE -->
+
 <div class="envelope" id="sobre">
 <span class="texto">Toca para abrir 💌</span>
 </div>
+
+<!-- CARTA -->
 
 <div class="card" id="carta">
 
@@ -221,26 +225,34 @@ carta.style.transform="scale(1)";
 
 }
 
-/* mover NO sin deformarse */
+/* mover botón NO dentro de la pantalla */
 
-function mover(){
+function moverBoton(){
 
-const ancho = window.innerWidth - botonNo.offsetWidth;
-const alto = window.innerHeight - botonNo.offsetHeight;
+const anchoPantalla = window.innerWidth;
+const altoPantalla = window.innerHeight;
 
-const x = Math.random() * ancho;
-const y = Math.random() * alto;
+const anchoBoton = botonNo.offsetWidth;
+const altoBoton = botonNo.offsetHeight;
 
-botonNo.style.position="fixed";
+const maxX = anchoPantalla - anchoBoton - 20;
+const maxY = altoPantalla - altoBoton - 20;
+
+const x = Math.random() * maxX;
+const y = Math.random() * maxY;
+
+botonNo.style.position = "fixed";
 botonNo.style.left = x + "px";
 botonNo.style.top = y + "px";
 
 }
 
-botonNo.addEventListener("mouseover", mover);
-botonNo.addEventListener("touchstart", mover);
+/* cuando intentan presionar NO */
 
-/* botón sí */
+botonNo.addEventListener("mouseover", moverBoton);
+botonNo.addEventListener("touchstart", moverBoton);
+
+/* botón SI */
 
 botonSi.onclick = () => {
 
@@ -248,7 +260,7 @@ window.location.href="respuesta.html";
 
 }
 
-/* corazones */
+/* corazones flotando */
 
 function crearCorazon(){
 
