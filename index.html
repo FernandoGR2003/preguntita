@@ -72,18 +72,19 @@ transform:scale(0);
 transition:.4s;
 }
 
-/* área de botones */
+/* BOTONES */
 
 .botones{
 position:relative;
-height:60px;
+height:70px;
 margin-top:20px;
 }
 
-/* botones */
+/* botones tamaño fijo */
 
 button{
-padding:12px 28px;
+width:100px;
+height:40px;
 font-size:16px;
 border:none;
 border-radius:10px;
@@ -99,7 +100,7 @@ left:0;
 
 #no{
 background:#eee;
-right:0;
+left:240px;
 }
 
 /* corazones */
@@ -134,7 +135,7 @@ animation:flotar linear infinite;
 a comer encebollado conmigo? ❤️
 </h2>
 
-<div class="botones" id="areaBotones">
+<div class="botones" id="area">
 
 <button id="si">Sí</button>
 <button id="no">No</button>
@@ -149,7 +150,7 @@ const sobre = document.getElementById("sobre");
 const carta = document.getElementById("carta");
 const botonNo = document.getElementById("no");
 const botonSi = document.getElementById("si");
-const area = document.getElementById("areaBotones");
+const area = document.getElementById("area");
 
 /* abrir carta */
 
@@ -160,18 +161,15 @@ carta.style.transform="scale(1)";
 
 }
 
-/* mover botón dentro del cuadro */
+/* mover botón NO dentro del cuadro */
 
-function moverBoton(){
+function mover(){
 
 const areaWidth = area.clientWidth;
 const areaHeight = area.clientHeight;
 
-const botonWidth = botonNo.offsetWidth;
-const botonHeight = botonNo.offsetHeight;
-
-const maxX = areaWidth - botonWidth;
-const maxY = areaHeight - botonHeight;
+const maxX = areaWidth - botonNo.offsetWidth;
+const maxY = areaHeight - botonNo.offsetHeight;
 
 const x = Math.random() * maxX;
 const y = Math.random() * maxY;
@@ -181,8 +179,8 @@ botonNo.style.top = y + "px";
 
 }
 
-botonNo.addEventListener("mouseover", moverBoton);
-botonNo.addEventListener("touchstart", moverBoton);
+botonNo.addEventListener("mouseover", mover);
+botonNo.addEventListener("touchstart", mover);
 
 /* botón SI */
 
