@@ -72,19 +72,15 @@ transform:scale(0);
 transition:.4s;
 }
 
-.card h1{
-color:#ff4d6d;
-font-size:22px;
-margin-bottom:25px;
-}
-
-/* BOTONES */
+/* área de botones */
 
 .botones{
-display:flex;
-justify-content:space-between;
-margin-top:15px;
+position:relative;
+height:60px;
+margin-top:20px;
 }
+
+/* botones */
 
 button{
 padding:12px 28px;
@@ -92,15 +88,18 @@ font-size:16px;
 border:none;
 border-radius:10px;
 cursor:pointer;
+position:absolute;
 }
 
 #si{
 background:#ff4d6d;
 color:white;
+left:0;
 }
 
 #no{
 background:#eee;
+right:0;
 }
 
 /* corazones */
@@ -130,14 +129,16 @@ animation:flotar linear infinite;
 
 <div class="card" id="carta">
 
-<h1>
+<h2 style="color:#ff4d6d;margin-bottom:20px;">
 ¿Quieres salir mañana <br>
 a comer encebollado conmigo? ❤️
-</h1>
+</h2>
 
-<div class="botones">
+<div class="botones" id="areaBotones">
+
 <button id="si">Sí</button>
 <button id="no">No</button>
+
 </div>
 
 </div>
@@ -148,6 +149,7 @@ const sobre = document.getElementById("sobre");
 const carta = document.getElementById("carta");
 const botonNo = document.getElementById("no");
 const botonSi = document.getElementById("si");
+const area = document.getElementById("areaBotones");
 
 /* abrir carta */
 
@@ -158,19 +160,22 @@ carta.style.transform="scale(1)";
 
 }
 
-/* mover botón NO pero siempre visible */
+/* mover botón dentro del cuadro */
 
 function moverBoton(){
 
-const margen = 80;
+const areaWidth = area.clientWidth;
+const areaHeight = area.clientHeight;
 
-const ancho = window.innerWidth - botonNo.offsetWidth - margen;
-const alto = window.innerHeight - botonNo.offsetHeight - margen;
+const botonWidth = botonNo.offsetWidth;
+const botonHeight = botonNo.offsetHeight;
 
-const x = Math.random() * ancho + margen/2;
-const y = Math.random() * alto + margen/2;
+const maxX = areaWidth - botonWidth;
+const maxY = areaHeight - botonHeight;
 
-botonNo.style.position="fixed";
+const x = Math.random() * maxX;
+const y = Math.random() * maxY;
+
 botonNo.style.left = x + "px";
 botonNo.style.top = y + "px";
 
@@ -202,7 +207,7 @@ heart.style.animationDuration=(Math.random()*4+4)+"s";
 
 document.body.appendChild(heart);
 
-setTimeout(()=>{heart.remove();},7000);
+setTimeout(()=>heart.remove(),7000);
 
 }
 
